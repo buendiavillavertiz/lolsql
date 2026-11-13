@@ -1,0 +1,76 @@
+CREATE TABLE CATEGORIA (
+    codigo INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL UNIQUE,
+    descripcion VARCHAR(150)
+    );
+
+CREATE TABLE PRODUCTO (
+    codigo INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    descripcion VARCHAR(150),
+    precion DECIMAL (10,2) NOT NULL,
+    stock INT NOT NULL,
+    codigo_categoria INT NOT NULL,
+    FOREIGN KEY(codigo_categoria)   REFERENCES CATEGORIA(codigo)
+    );
+    
+CREATE TABLE VENTA (
+    numero_venta INT PRIMARY KEY AUTO_INCREMENT,
+    fecha VARCHAR(50) NOT NULL,
+    dni_cliente INT NULL,
+    FOREIGN KEY(dni_cliente) REFERENCE CLIENTE(dni)
+    );
+    
+CREATE TABLE VENTA (
+    numero_venta INT PRIMARY KEY AUTO_INCREMENT,
+    fecha VARCHAR(50) NOT NULL,
+    dni_cliente INT NULL,
+    FOREIGN KEY(dni_cliente) REFERENCE CLIENTE(dni)
+    );
+    
+CREATE TABLE DETALLE_VENTA(
+    numero_venta INT NOT NULL,
+    codigo_producto INT NOT NULL,
+    cantidad INT NOT NULL,
+    precio_venta DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (numero_venta,codigo_producto),
+    FOREIGN KEY (numero_venta) REFERENCES VENTA (numero_venta),
+    FOREIGN KEY (codigo_producto) REFERENCES PRODUCTO (codigo)
+    );
+  
+INSERT INTO categoria (nombre,descripcion) VALUES
+(´Notebooks´,´Computadoras portatiles´),
+(´Perifericos´,´Teclados´´mouses y accesorios´),
+(´Monitores´,´Pantallas 2K y 4K´),
+(´Componentes de PC´,´Placa de Video, procesadores y fuentes´),
+(´Audio´,´Auriculares  Parlantes´);
+
+INSERT INTO cliente (dni, nombre, apellido, telefono, email, ciudad) VALUES
+(11111111, 'Carlos', 'Gomez', '2235123456', 'carlos.gomez@gmail.com', 'Mar del Plata'),
+(22222222, 'Ana', 'Martinez', '1149876543', 'ana.martinez@gmail.com', 'Buenos Aires'),
+(33333333, 'Lucas', 'Perez', '2236112233',  'lucas.perez@hotmail.com', 'Mar del Plata'),
+(44444444, 'Sofia', 'Lopez', '3415556677', 'sofia.lopez@gmail.com', 'Rosario'),
+(55555555, 'Mateo', 'Rodriguez', '2234998877', 'mateo.rodriguez@gmail.com', 'Mar del Plata'),
+(66666666, 'Lucia', 'Fernandez', '2614332211', 'lucia.fer@gmail.com', 'Mendoza'),
+(77777777, 'Joaquin', 'Diaz', '2235001122', 'joaquin.diaz@yahoo.com', 'Mar del Plata'),
+(88888888, 'Valentina', 'Sanchez', '3516445566', 'valen.sanchez@gmail.com', 'Cordoba'),
+(99999999, 'Nicolas', 'Romero', '2234115599', 'nico.romero@hotmail.com', 'Mar del Plata'),
+(10101010, 'Camila', 'Torres', '2214887766', 'camila.torres@gmail.com', 'La Plata');
+
+
+INSERT INTO producto (nombre,descripcion,precio,stock,codigo_categoria) VALUES   
+(´Notebooks Lenovo´,´Intel i5 8GB SSD 256GB´,120000,12,1),
+(´Notebook Asus TUF´,´AMD Ryzen 7 16GB SSD 512GB RTX 3050´,250000,5,1),
+(´Notebook HP Pavilion 15´,´Inteli7 16GB SSD 512GB´,180000,8,1),
+(´Mouse Logi G203´,´Mouse Gamer RGB´,35000,25,2),
+(´Teclado Mecanico Redragon´,´Switch Blue RGB´,45000,15,2),
+(´Monitor SAMSUNG 24FHD´,´75Hz IPS Panel´,160000,9,3),
+(´Monitor LG 27 144Hz´,´1ms IPS Gaming´,160000,4,3),
+(´Placa de Video RTX 3060 12GB´,´NVIDIA GEFORCE GDDR6´,220000,6,4),
+(´Procesador AMD Ryzen 5 5600X´,´6 nucleos 12 hilos´,95000,18,4),
+(´Auriculars HyperX Cloude II´,´Sonido 7.1 Surrond´,65000,20,5),
+(´Mouse inalambrico Logitech MX 3S´,´Ergonomico profesional´,80000,3,2),
+('Placa de Video RX 6600 8GB', 'AMD Radeon GDDR6', 175000.00, 7, 4),
+('Fuente Corsair 650W 80 Plus Bronze', 'Fuente certificada', 55000.00, 14,4),
+('Auriculares Redragon Zeus H510', 'Con microfono USB', 420000.00, 8, 5),
+('Notebook Dell Inspiron 3511', 'Intel i3 8GB SSD 256GB', 95000.00, 2, 1);
